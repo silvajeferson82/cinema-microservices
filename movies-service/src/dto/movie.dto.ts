@@ -1,4 +1,3 @@
-
 export type IMovieDTO = {
   _id: string;
   titulo: string;

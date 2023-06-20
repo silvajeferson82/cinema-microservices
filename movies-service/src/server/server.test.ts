@@ -1,19 +1,22 @@
-import { test, expect, beforeAll } from '@jest/globals';
+import { test, expect, jest } from '@jest/globals';
+import { start, stop } from './app';
 import request from 'supertest';
-import * as app from './app';
+
+const apiMock = jest.fn((app, repository) => true);
 
 test('start server', async () => {
-  const server = await app.start();
+  const server = await start(apiMock);
   expect(server).toBeTruthy();
 });
 
 test('Health Check', async () => {
-  const server = await app.start();
+  process.env.PORT = '3001';
+  const server = await start(apiMock);
   const response = await request(server).get('/health');
   expect(response.status).toEqual(200);
 });
 
 test('stop server', async () => {
-  const isStopped = await app.stop();
+  const isStopped = await stop();
   expect(isStopped).toBeTruthy();
 });

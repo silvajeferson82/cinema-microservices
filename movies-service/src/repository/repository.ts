@@ -1,6 +1,6 @@
 import * as database from '../config/database';
 import { ObjectId } from 'mongodb';
-import { IMovieDTO } from './DTO/repositoryDTO';
+import { IMovieDTO } from '../dto/movie.dto';
 
 export const getAllMovies = async (): Promise<IMovieDTO[]> => {
   try {
